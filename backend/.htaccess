@@ -1,0 +1,6 @@
+# 后端 API 根目录 - 请将 web 根指向 public/ 子目录
+# 如使用 Apache，此 .htaccess 禁止直接访问 application/ conf/ 目录
+<FilesMatch "^(Bootstrap|.*Controller|.*Model|.*Plugin)\.php$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
