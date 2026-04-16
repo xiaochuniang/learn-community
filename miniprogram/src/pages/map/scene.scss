@@ -1,0 +1,68 @@
+/* 地图目标场景页公共样式 */
+.scene-page {
+  min-height: 100vh;
+  background: #F9FBE7;
+  display: flex;
+  flex-direction: column;
+}
+
+.scene-header {
+  background: linear-gradient(135deg, #43a047, #1b5e20);
+  padding: 60rpx 32rpx 28rpx;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  font-size: 26rpx;
+  color: rgba(255,255,255,0.85);
+}
+
+.scene-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #fff;
+}
+
+.scene-content { padding: 32rpx; }
+
+.scene-banner {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  margin-bottom: 32rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0,0,0,0.06);
+}
+
+.banner-icon  { font-size: 80rpx; }
+.banner-title { font-size: 36rpx; font-weight: 700; color: #1B5E20; }
+.banner-desc  { font-size: 26rpx; color: #558B2F; text-align: center; }
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24rpx;
+}
+
+.feature-card {
+  background: #fff;
+  border-radius: 20rpx;
+  padding: 36rpx 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0,0,0,0.05);
+}
+
+.feature-icon { font-size: 56rpx; }
+.feature-name { font-size: 28rpx; font-weight: 600; color: #1a1a2e; }
+.feature-desc { font-size: 22rpx; color: #8a8fa8; text-align: center; }

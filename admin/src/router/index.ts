@@ -179,6 +179,27 @@ export const routes: RouteRecordRaw[] = [
       }
     ]
   },
+  // ==================== 虚拟地图管理 ====================
+  {
+    path: '/map',
+    component: Layout,
+    redirect: '/map/points',
+    meta: { title: '虚拟地图', icon: 'MapLocation' },
+    children: [
+      {
+        path: 'points',
+        name: 'MapPoints',
+        component: () => import('@/views/map/points.vue'),
+        meta: { title: '点位管理', icon: 'Location' }
+      },
+      {
+        path: 'character',
+        name: 'MapCharacter',
+        component: () => import('@/views/map/character.vue'),
+        meta: { title: '人物配置', icon: 'Avatar' }
+      }
+    ]
+  },
   // ==================== 系统管理 ====================
   {
     path: '/system',

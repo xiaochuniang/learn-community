@@ -11,9 +11,9 @@
     {
       "path": "pages/home/index",
       "style": {
-        "navigationBarTitleText": "学习社区",
-        "navigationBarBackgroundColor": "#3b82f6",
-        "navigationBarTextStyle": "white"
+        "navigationBarTitleText": "学习地图",
+        "navigationStyle": "custom",
+        "enablePullDownRefresh": false
       }
     },
     {
@@ -56,6 +56,56 @@
     }
   ],
   "subPackages": [
+    {
+      "root": "pages/map",
+      "pages": [
+        {
+          "path": "library",
+          "style": {
+            "navigationBarTitleText": "图书馆",
+            "navigationBarBackgroundColor": "#1b5e20",
+            "navigationBarTextStyle": "white",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "creative",
+          "style": {
+            "navigationBarTitleText": "文创店",
+            "navigationBarBackgroundColor": "#1b5e20",
+            "navigationBarTextStyle": "white",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "stationery",
+          "style": {
+            "navigationBarTitleText": "文具店",
+            "navigationBarBackgroundColor": "#1b5e20",
+            "navigationBarTextStyle": "white",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "bookstore",
+          "style": {
+            "navigationBarTitleText": "书店",
+            "navigationBarBackgroundColor": "#1b5e20",
+            "navigationBarTextStyle": "white",
+            "navigationStyle": "custom"
+          }
+        },
+        {
+          "path": "club",
+          "style": {
+            "navigationBarTitleText": "社团",
+            "navigationBarBackgroundColor": "#1b5e20",
+            "navigationBarTextStyle": "white",
+            "navigationStyle": "custom"
+          }
+        }
+      ]
+    },
     {
       "root": "pages/course-detail",
       "pages": [

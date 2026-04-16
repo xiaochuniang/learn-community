@@ -665,3 +665,63 @@ INSERT INTO `lc_study_room` (`name`, `description`, `room_type`, `capacity`, `is
 ('公共自习室',   '免费开放，适合日常自习',         1, 500, 1, 1),
 ('专注计时间',   '番茄钟专注计时，提升学习效率',   2, 999, 1, 1),
 ('陪伴自习室',   '由认证陪伴师驻守，实时陪伴督促', 3, 50,  0, 1);
+
+-- =====================================================================
+-- 25. 虚拟地图点位表 lc_map_point
+-- =====================================================================
+CREATE TABLE `lc_map_point` (
+  `id`           BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `key`          VARCHAR(64)     NOT NULL                COMMENT '点位唯一标识（英文，如 library）',
+  `name`         VARCHAR(64)     NOT NULL                COMMENT '点位名称',
+  `icon`         VARCHAR(32)     NOT NULL DEFAULT '📍'  COMMENT '点位图标（Emoji）',
+  `description`  VARCHAR(255)    NOT NULL DEFAULT ''     COMMENT '点位描述',
+  `grid_x`       INT             NOT NULL DEFAULT 0      COMMENT '等距网格X坐标',
+  `grid_y`       INT             NOT NULL DEFAULT 0      COMMENT '等距网格Y坐标',
+  `build_height` INT             NOT NULL DEFAULT 48     COMMENT '建筑等距高度（像素）',
+  `color_top`    VARCHAR(16)     NOT NULL DEFAULT '#87CEEB' COMMENT '建筑顶面颜色',
+  `color_left`   VARCHAR(16)     NOT NULL DEFAULT '#5BA3D0' COMMENT '建筑左侧面颜色',
+  `color_right`  VARCHAR(16)     NOT NULL DEFAULT '#3A7DB8' COMMENT '建筑右侧面颜色',
+  `target_path`  VARCHAR(255)    NOT NULL DEFAULT ''     COMMENT '点击进入的小程序页面路径',
+  `is_home`      TINYINT         NOT NULL DEFAULT 0      COMMENT '是否为角色初始位置：1是',
+  `sort`         INT             NOT NULL DEFAULT 0      COMMENT '排序权重（越大越靠前）',
+  `status`       TINYINT         NOT NULL DEFAULT 1      COMMENT '状态：1启用 0禁用',
+  `is_delete`    TINYINT         NOT NULL DEFAULT 0      COMMENT '软删除',
+  `create_time`  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time`  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_key` (`key`),
+  KEY `idx_status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='虚拟地图点位表';
+
+-- =====================================================================
+-- 26. 虚拟地图人物配置表 lc_map_character（单行配置）
+-- =====================================================================
+CREATE TABLE `lc_map_character` (
+  `id`           BIGINT UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `name`         VARCHAR(32)     NOT NULL DEFAULT '小明' COMMENT '人物昵称',
+  `body_color`   VARCHAR(16)     NOT NULL DEFAULT '#FF9800' COMMENT '衣服颜色',
+  `skin_color`   VARCHAR(16)     NOT NULL DEFAULT '#FFCC80' COMMENT '皮肤颜色',
+  `hair_color`   VARCHAR(16)     NOT NULL DEFAULT '#5D4037' COMMENT '头发颜色',
+  `walk_speed`   DECIMAL(4,2)    NOT NULL DEFAULT 2.00   COMMENT '行走速度（网格/秒）',
+  `home_grid_x`  INT             NOT NULL DEFAULT 2      COMMENT '初始网格X',
+  `home_grid_y`  INT             NOT NULL DEFAULT 8      COMMENT '初始网格Y',
+  `create_time`  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time`  DATETIME        NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='地图卡通人物配置表（单行）';
+
+-- 初始化默认地图点位
+INSERT INTO `lc_map_point`
+  (`key`,`name`,`icon`,`description`,`grid_x`,`grid_y`,`build_height`,`color_top`,`color_left`,`color_right`,`target_path`,`is_home`,`sort`,`status`)
+VALUES
+  ('home',       '自己家', '🏠','温暖的出发地',                      2, 8, 52, '#FFE066','#E8C84A','#C8A825','',                  1, 100, 1),
+  ('library',    '图书馆', '📚','知识的殿堂，借阅海量书目',            2, 2, 72, '#87CEEB','#5BA3D0','#3A7DB8','/pages/map/library',  0,  90, 1),
+  ('study_room', '自习室', '✏️','专注学习，番茄钟陪伴',               8, 2, 64, '#B39DDB','#7E57C2','#512DA8','/pages/study/room',    0,  80, 1),
+  ('creative',   '文创店', '🎨','文创周边，激发创意灵感',              8, 7, 56, '#FFAB76','#E87B3A','#C65A1A','/pages/map/creative',  0,  70, 1),
+  ('stationery', '文具店', '🖊️','学习文具一站齐，满足所有需求',       5, 9, 52, '#A5D6A7','#66BB6A','#388E3C','/pages/map/stationery',0,  60, 1),
+  ('bookstore',  '书店',   '📖','精选好书，发现阅读乐趣',              1, 5, 60, '#EF9A9A','#E57373','#C62828','/pages/map/bookstore',  0,  50, 1),
+  ('club',       '社团',   '🎭','加入社团，结交志同道合的朋友',        6, 4, 60, '#80DEEA','#4DD0E1','#0097A7','/pages/map/club',       0,  40, 1);
+
+-- 初始化默认人物配置
+INSERT INTO `lc_map_character` (`name`,`body_color`,`skin_color`,`hair_color`,`walk_speed`,`home_grid_x`,`home_grid_y`)
+VALUES ('小明','#FF9800','#FFCC80','#5D4037', 2.00, 2, 8);
