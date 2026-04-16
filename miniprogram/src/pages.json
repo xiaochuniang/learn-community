@@ -87,6 +87,15 @@
             "navigationBarBackgroundColor": "#3b82f6",
             "navigationBarTextStyle": "white"
           }
+        },
+        {
+          "path": "apply",
+          "style": {
+            "navigationBarTitleText": "成为陪伴师",
+            "navigationBarBackgroundColor": "#3b82f6",
+            "navigationBarTextStyle": "white",
+            "enablePullDownRefresh": false
+          }
         }
       ]
     },
