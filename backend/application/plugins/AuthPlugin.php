@@ -50,8 +50,7 @@ class AuthPlugin extends Yaf_Plugin_Abstract
         if (preg_match('/Bearer\s+(.+)/i', $header, $m)) {
             return trim($m[1]);
         }
-        // 兜底：query string ?token=xxx（仅开发调试用）
-        return trim($_GET['token'] ?? '');
+        return '';
     }
 
     private function abort(int $code, string $message): never

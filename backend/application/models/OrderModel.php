@@ -165,6 +165,9 @@ class OrderModel extends BaseModel
     public function refund(int $id, string $remark): void
     {
         $pdo = $this->db->getPdo();
+        if ($pdo->inTransaction()) {
+            throw new RuntimeException('嵌套事务不被支持');
+        }
         $pdo->beginTransaction();
 
         try {

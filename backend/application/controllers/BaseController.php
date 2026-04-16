@@ -63,7 +63,7 @@ abstract class BaseController extends Yaf_Controller_Abstract
      */
     protected function page(): array
     {
-        $page  = max(1, (int)$this->input('page', 1));
+        $page  = min(10000, max(1, (int)$this->input('page', 1)));
         $limit = min(100, max(1, (int)$this->input('limit', 20)));
         return ['page' => $page, 'limit' => $limit, 'offset' => ($page - 1) * $limit];
     }

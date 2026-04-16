@@ -201,6 +201,9 @@ class TutorModel extends BaseModel
         int    $adminId
     ): void {
         $pdo = $this->db->getPdo();
+        if ($pdo->inTransaction()) {
+            throw new RuntimeException('嵌套事务不被支持');
+        }
         $pdo->beginTransaction();
 
         try {
