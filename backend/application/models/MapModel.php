@@ -32,9 +32,9 @@ class MapModel extends BaseModel
     public function getAllPoints(int $page, int $limit): array
     {
         $offset = ($page - 1) * $limit;
-        $total  = (int)$this->db->fetchOne(
+        $total  = (int)(($this->db->fetchOne(
             "SELECT COUNT(*) AS c FROM lc_map_point WHERE is_delete=0"
-        )['c'];
+        ) ?? ['c' => 0])['c']);
         $list   = $this->db->fetchAll(
             "SELECT * FROM lc_map_point WHERE is_delete=0
              ORDER BY sort ASC, id ASC LIMIT {$limit} OFFSET {$offset}"
@@ -51,7 +51,7 @@ class MapModel extends BaseModel
             $id = (int)$data['id'];
             unset($data['id']);
             $data['update_time'] = date('Y-m-d H:i:s');
-            $this->db->update('lc_map_point', $data, 'id = :id', [':id' => $id]);
+            $this->db->update('lc_map_point', $data, ['id' => $id]);
             return $id;
         }
         $data['create_time'] = date('Y-m-d H:i:s');
@@ -67,8 +67,7 @@ class MapModel extends BaseModel
         $this->db->update(
             'lc_map_point',
             ['is_delete' => 1, 'update_time' => date('Y-m-d H:i:s')],
-            'id = :id',
-            [':id' => $id]
+            ['id' => $id]
         );
     }
 
@@ -100,7 +99,7 @@ class MapModel extends BaseModel
         if ($existing) {
             $this->db->update(
                 'lc_map_character', $data,
-                'id = :id', [':id' => $existing['id']]
+                ['id' => (int)$existing['id']]
             );
         } else {
             $data['create_time'] = date('Y-m-d H:i:s');

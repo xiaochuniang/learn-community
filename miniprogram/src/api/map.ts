@@ -72,7 +72,7 @@ export function toMapPoint(raw: MapPointRaw): MapPoint {
   }
 }
 
-function toCharacterConfig(raw: Record<string, unknown>): CharacterConfig {
+function parseCharacterConfig(raw: Record<string, unknown>): CharacterConfig {
   return {
     id:          Number(raw['id']           ?? 0),
     name:        String(raw['name']         ?? '小明'),
@@ -96,7 +96,7 @@ export async function getMapPoints(): Promise<MapPoint[]> {
 /** 获取卡通人物配置 */
 export async function getCharacterConfig(): Promise<CharacterConfig> {
   const res = await request.get<Record<string, unknown>>('/map/character')
-  return toCharacterConfig(res.data || {})
+  return parseCharacterConfig(res.data || {})
 }
 
 // ── 本地默认数据（离线 / 接口失败时的兜底） ──────────────────────────
